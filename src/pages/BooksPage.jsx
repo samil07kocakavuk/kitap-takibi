@@ -7,8 +7,8 @@ function createId() {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`
 }
 
-export default function BooksPage() {
-  const [data, setData] = useState(loadBooks)
+export default function BooksPage({ accountId }) {
+  const [data, setData] = useState(() => loadBooks(accountId))
   const [editingBook, setEditingBook] = useState(null)
   const [feedback, setFeedback] = useState(() =>
     data.error ? { type: 'error', message: data.error } : null,
@@ -32,7 +32,7 @@ export default function BooksPage() {
   function commit(nextBooks, successMessage) {
     setData({ books: nextBooks, error: '' })
 
-    if (saveBooks(nextBooks)) {
+    if (saveBooks(accountId, nextBooks)) {
       setFeedback({ type: 'success', message: successMessage })
     } else {
       setFeedback({
@@ -91,10 +91,10 @@ export default function BooksPage() {
   return (
     <div className="mx-auto w-full max-w-[1080px] px-3 pb-8 pt-6 sm:px-5 sm:pt-8">
       <header className="mb-6">
-        <h1 className="m-0 text-2xl font-bold leading-tight tracking-tight sm:text-[28px]">
-          Kitap Takibi
+        <h1 className="m-0 text-2xl font-bold leading-tight tracking-tight text-brand-strong sm:text-[28px]">
+          Kitaplarım
         </h1>
-        <p className="mt-1.5 text-sm text-slate-500">
+        <p className="mt-1.5 text-sm text-stone-600">
           Okuduğun ve okuyacağın kitapları tek yerde takip et.
         </p>
       </header>
@@ -119,10 +119,10 @@ export default function BooksPage() {
           onCancelEdit={handleCancelEdit}
         />
 
-        <section className="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
+        <section className="rounded-lg border border-stone-200 bg-white p-4 sm:p-5">
           <div className="mb-4">
             <h2 className="m-0 text-lg font-semibold">Kitaplarım</h2>
-            <p className="mt-1 text-[13px] text-slate-500">
+            <p className="mt-1 text-[13px] text-stone-600">
               Eklediğin kitaplar burada listelenir.
             </p>
           </div>
@@ -135,8 +135,8 @@ export default function BooksPage() {
         </section>
       </main>
 
-      <footer className="mt-6 text-center text-xs text-slate-500">
-        Veriler yalnızca bu tarayıcıda saklanır.
+      <footer className="mt-6 text-center text-xs text-stone-500">
+        Veriler bu tarayıcıda, hesabına bağlı olarak saklanır.
       </footer>
     </div>
   )

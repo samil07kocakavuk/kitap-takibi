@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand: #2f6152;
+  --color-brand-strong: #22493e;
+  --color-brand-soft: #e6efe9;
+}
+
 :root {
   color-scheme: light;
 }
@@ -8,5 +14,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background-color: #f5f6f7;
+  background-color: #ffffff;
+  color: #22302b;
+}
+
+::selection {
+  background-color: #d9e7df;
 }
