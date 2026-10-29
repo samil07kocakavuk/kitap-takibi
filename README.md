@@ -23,8 +23,22 @@ Kitap Takibi; kitap adı, yazar, sayfa sayısı, okuma durumu ve isteğe bağlı
 
 - React 19
 - Vite 8
-- Pure CSS
+- Tailwind CSS 4
 - LocalStorage
+
+## Proje Yapısı
+
+```text
+src/
+├─ components/   # BookForm ve BookList bileşenleri
+├─ pages/        # BooksPage sayfası
+├─ interfaces/   # Kitap modeli, durum sabitleri ve doğrulama
+├─ utils/        # LocalStorage okuma/yazma
+├─ App.jsx
+└─ main.jsx
+```
+
+Bileşenler `components`, sayfa düzeni `pages`, veri sözleşmeleri ve durum tanımları `interfaces` klasöründe toplanmıştır.
 
 ## Veri Saklama
 

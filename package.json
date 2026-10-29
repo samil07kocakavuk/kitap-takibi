@@ -9,12 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.2",
     "vite": "^8.3.5"
   },
-  "description": "React, Vite ve LocalStorage ile geliştirilmiş kitap takip uygulaması."
+  "description": "React, Vite, Tailwind CSS ve LocalStorage ile geliştirilmiş kitap takip uygulaması."
 }

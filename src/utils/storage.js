@@ -1,4 +1,4 @@
-import { isValidStatus } from '../data/statuses.js'
+import { isValidStatus } from '../interfaces/books.js'
 
 export const STORAGE_KEY = 'kitap-takibi.books.v1'
 
