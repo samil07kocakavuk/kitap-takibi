@@ -91,7 +91,6 @@ export default function App() {
   return (
     <div className="page">
       <header className="page-header">
-        <p className="eyebrow">KİŞİSEL OKUMA GÜNLÜĞÜ</p>
         <h1>Kitap Takibi</h1>
         <p className="lede">
           Okuduğun ve okuyacağın kitapları tek yerde takip et.
@@ -116,7 +115,6 @@ export default function App() {
 
         <section className="panel list-panel" aria-labelledby="list-title">
           <div className="panel-heading">
-            <p className="eyebrow">KİTAPLAR</p>
             <h2 id="list-title">Kitaplarım</h2>
             <p>Eklediğin kitaplar burada listelenir.</p>
           </div>

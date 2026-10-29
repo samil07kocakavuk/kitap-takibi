@@ -15,6 +15,7 @@ function normalizeBook(value) {
   const title = asText(value.title)
   const author = asText(value.author)
   const notes = asText(value.notes)
+  const pageCount = Number(value.pageCount)
 
   if (!id || !title || !author || !isValidStatus(value.status)) {
     return null
@@ -24,6 +25,10 @@ function normalizeBook(value) {
     id,
     title,
     author,
+    pageCount:
+      Number.isInteger(pageCount) && pageCount > 0 && pageCount <= 10000
+        ? pageCount
+        : 0,
     status: value.status,
     notes: notes.slice(0, 300),
   }

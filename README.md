@@ -4,11 +4,12 @@ Okuduğun ve okuyacağın kitapları tek yerde takip etmek için geliştirilmiş
 
 ## Proje Hakkında
 
-Kitap Takibi; kitap adı, yazar, okuma durumu ve isteğe bağlı bir notla kayıt oluşturmanı sağlar. Kayıtlar tarayıcının LocalStorage alanında saklanır; sayfa yenilendiğinde korunur. Uygulama herhangi bir backend veya kullanıcı hesabı gerektirmez.
+Kitap Takibi; kitap adı, yazar, sayfa sayısı, okuma durumu ve isteğe bağlı bir notla kayıt oluşturmanı sağlar. Kayıtlar tarayıcının LocalStorage alanında saklanır; sayfa yenilendiğinde korunur. Uygulama herhangi bir backend veya kullanıcı hesabı gerektirmez.
 
 ## Özellikler
 
 - Kitap ekleme
+- Sayfa sayısı bilgisi
 - Kitapları listeleme
 - Kitap bilgilerini düzenleme
 - Onaylı kitap silme
@@ -24,6 +25,10 @@ Kitap Takibi; kitap adı, yazar, okuma durumu ve isteğe bağlı bir notla kayı
 - Vite 8
 - Pure CSS
 - LocalStorage
+
+## Veri Saklama
+
+Kayıtlar tarayıcının LocalStorage alanında `kitap-takibi.books.v1` anahtarında JSON olarak tutulur. Harici API, backend veya veritabanı kullanılmaz. Bu yöntem proje yönergesinde izin verilen bir yaklaşımdır; veriler yalnızca aynı tarayıcıda bulunur.
 
 ## Kurulum
 
