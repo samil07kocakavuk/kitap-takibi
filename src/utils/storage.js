@@ -1,6 +1,10 @@
 import { isValidStatus } from '../interfaces/books.js'
 
-export const STORAGE_KEY = 'kitap-takibi.books.v1'
+export const LEGACY_STORAGE_KEY = 'kitap-takibi.books.v1'
+
+export function booksStorageKey(userId) {
+  return `${LEGACY_STORAGE_KEY}.${userId}`
+}
 
 function asText(value) {
   return typeof value === 'string' ? value.trim() : ''
@@ -34,9 +38,13 @@ function normalizeBook(value) {
   }
 }
 
-export function loadBooks() {
+export function loadBooks(userId) {
+  if (!userId) {
+    return { books: [], error: '' }
+  }
+
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(booksStorageKey(userId))
 
     if (raw === null) {
       return { books: [], error: '' }
@@ -68,9 +76,37 @@ export function loadBooks() {
   }
 }
 
-export function saveBooks(books) {
+export function saveBooks(userId, books) {
+  if (!userId) {
+    return false
+  }
+
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(books))
+    localStorage.setItem(booksStorageKey(userId), JSON.stringify(books))
+    return true
+  } catch {
+    return false
+  }
+}
+
+export function migrateLegacyBooks(userId) {
+  if (!userId) {
+    return false
+  }
+
+  try {
+    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY)
+
+    if (legacy === null) {
+      return false
+    }
+
+    if (localStorage.getItem(booksStorageKey(userId)) !== null) {
+      return false
+    }
+
+    localStorage.setItem(booksStorageKey(userId), legacy)
+    localStorage.removeItem(LEGACY_STORAGE_KEY)
     return true
   } catch {
     return false

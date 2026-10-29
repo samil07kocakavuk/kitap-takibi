@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { STATUS_OPTIONS, isValidStatus } from '../interfaces/books.js'
+import { buttonClass, FIELD_INPUT, FIELD_LABEL } from './formClasses.js'
 
 const EMPTY_FORM = {
   title: '',
@@ -8,14 +9,6 @@ const EMPTY_FORM = {
   status: 'okunacak',
   notes: '',
 }
-
-const INPUT_CLASS =
-  'w-full rounded-md border border-slate-300 bg-white px-2.5 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-[3px] focus:ring-blue-600/15 aria-[invalid=true]:border-red-600'
-
-const LABEL_CLASS = 'text-[13px] font-medium text-slate-700'
-
-const BUTTON_BASE =
-  'inline-flex items-center justify-center rounded-md border px-3.5 py-2 text-sm font-medium leading-tight transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
 
 function formFromBook(book) {
   if (!book) {
@@ -149,14 +142,14 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
 
   return (
     <section
-      className="rounded-lg border border-slate-200 bg-white p-4 sm:p-5"
+      className="rounded-lg border border-stone-200 bg-white p-4 sm:p-5"
       aria-labelledby="form-title"
     >
       <div className="mb-4">
         <h2 id="form-title" className="m-0 text-lg font-semibold">
           {isEditing ? 'Kitabı düzenle' : 'Yeni kitap'}
         </h2>
-        <p className="mt-1 text-[13px] text-slate-500">
+        <p className="mt-1 text-[13px] text-stone-600">
           {isEditing
             ? 'Bilgileri güncelle ve kaydet.'
             : 'Kitabını eklemek için formu doldur.'}
@@ -165,7 +158,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
 
       <form onSubmit={handleSubmit} noValidate>
         <div className="mb-3.5 flex flex-col gap-1.5">
-          <label htmlFor="book-title" className={LABEL_CLASS}>
+          <label htmlFor="book-title" className={FIELD_LABEL}>
             Kitap adı <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <input
@@ -182,7 +175,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
             aria-required="true"
             aria-invalid={Boolean(errors.title)}
             aria-describedby={errors.title ? 'title-error' : undefined}
-            className={INPUT_CLASS}
+            className={FIELD_INPUT}
           />
           {errors.title && (
             <p className="m-0 text-xs text-red-600" id="title-error">
@@ -192,7 +185,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
         </div>
 
         <div className="mb-3.5 flex flex-col gap-1.5">
-          <label htmlFor="book-author" className={LABEL_CLASS}>
+          <label htmlFor="book-author" className={FIELD_LABEL}>
             Yazar <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <input
@@ -209,7 +202,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
             aria-required="true"
             aria-invalid={Boolean(errors.author)}
             aria-describedby={errors.author ? 'author-error' : undefined}
-            className={INPUT_CLASS}
+            className={FIELD_INPUT}
           />
           {errors.author && (
             <p className="m-0 text-xs text-red-600" id="author-error">
@@ -219,7 +212,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
         </div>
 
         <div className="mb-3.5 flex flex-col gap-1.5">
-          <label htmlFor="book-page-count" className={LABEL_CLASS}>
+          <label htmlFor="book-page-count" className={FIELD_LABEL}>
             Sayfa sayısı{' '}
             <span aria-hidden="true" className="text-red-600">*</span>
           </label>
@@ -238,7 +231,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
             aria-required="true"
             aria-invalid={Boolean(errors.pageCount)}
             aria-describedby={errors.pageCount ? 'page-count-error' : undefined}
-            className={INPUT_CLASS}
+            className={FIELD_INPUT}
           />
           {errors.pageCount && (
             <p className="m-0 text-xs text-red-600" id="page-count-error">
@@ -248,7 +241,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
         </div>
 
         <div className="mb-3.5 flex flex-col gap-1.5">
-          <label htmlFor="book-status" className={LABEL_CLASS}>
+          <label htmlFor="book-status" className={FIELD_LABEL}>
             Durum <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <select
@@ -261,7 +254,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
             aria-required="true"
             aria-invalid={Boolean(errors.status)}
             aria-describedby={errors.status ? 'status-error' : undefined}
-            className={INPUT_CLASS}
+            className={FIELD_INPUT}
           >
             {STATUS_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -277,8 +270,8 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
         </div>
 
         <div className="mb-3.5 flex flex-col gap-1.5">
-          <label htmlFor="book-notes" className={LABEL_CLASS}>
-            Not <span className="font-normal text-slate-500">(isteğe bağlı)</span>
+          <label htmlFor="book-notes" className={FIELD_LABEL}>
+            Not <span className="font-normal text-stone-500">(isteğe bağlı)</span>
           </label>
           <textarea
             ref={notesRef}
@@ -291,9 +284,9 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
             maxLength={300}
             aria-invalid={Boolean(errors.notes)}
             aria-describedby={errors.notes ? 'notes-error' : undefined}
-            className={`${INPUT_CLASS} min-h-[88px] resize-y`}
+            className={`${FIELD_INPUT} min-h-[88px] resize-y`}
           />
-          <span className="self-end text-xs text-slate-500">
+          <span className="self-end text-xs text-stone-500">
             {form.notes.length}/300
           </span>
           {errors.notes && (
@@ -306,14 +299,14 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
         <div className="mt-1 flex flex-wrap gap-2">
           <button
             type="submit"
-            className={`${BUTTON_BASE} border-blue-600 bg-blue-600 text-white hover:bg-blue-700`}
+            className={buttonClass('primary')}
           >
             {isEditing ? 'Değişiklikleri kaydet' : 'Kitap ekle'}
           </button>
           {isEditing && (
             <button
               type="button"
-              className={`${BUTTON_BASE} border-slate-300 bg-white text-slate-900 hover:bg-slate-50`}
+              className={buttonClass('ghost')}
               onClick={onCancelEdit}
             >
               Vazgeç
