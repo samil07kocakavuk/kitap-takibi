@@ -1,5 +1,5 @@
 {
-  "name": "web-proje",
+  "name": "kitap-takibi",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -15,5 +15,6 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.2",
     "vite": "^8.3.5"
-  }
+  },
+  "description": "React, Vite ve LocalStorage ile geliştirilmiş kitap takip uygulaması."
 }
