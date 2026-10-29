@@ -4,6 +4,7 @@ import { STATUS_OPTIONS, isValidStatus } from '../data/statuses.js'
 const EMPTY_FORM = {
   title: '',
   author: '',
+  pageCount: '',
   status: 'okunacak',
   notes: '',
 }
@@ -16,6 +17,7 @@ function formFromBook(book) {
   return {
     title: book.title,
     author: book.author,
+    pageCount: book.pageCount > 0 ? String(book.pageCount) : '',
     status: book.status,
     notes: book.notes,
   }
@@ -26,6 +28,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
   const [errors, setErrors] = useState({})
   const titleRef = useRef(null)
   const authorRef = useRef(null)
+  const pageCountRef = useRef(null)
   const statusRef = useRef(null)
   const notesRef = useRef(null)
   const isEditing = Boolean(editingBook)
@@ -58,6 +61,8 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
     const nextErrors = {}
     const title = form.title.trim()
     const author = form.author.trim()
+    const pageCountText = form.pageCount.trim()
+    const pageCount = Number(pageCountText)
     const notes = form.notes.trim()
 
     if (!title) {
@@ -70,6 +75,15 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
       nextErrors.author = 'Yazar zorunlu.'
     } else if (author.length > 80) {
       nextErrors.author = 'Yazar adı en fazla 80 karakter olabilir.'
+    }
+
+    if (
+      !pageCountText ||
+      !Number.isInteger(pageCount) ||
+      pageCount < 1 ||
+      pageCount > 10000
+    ) {
+      nextErrors.pageCount = '1 ile 10000 arasında bir sayfa sayısı girin.'
     }
 
     if (!isValidStatus(form.status)) {
@@ -94,12 +108,17 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
       const refs = {
         title: titleRef,
         author: authorRef,
+        pageCount: pageCountRef,
         status: statusRef,
         notes: notesRef,
       }
-      const firstInvalidField = ['title', 'author', 'status', 'notes'].find(
-        (field) => nextErrors[field],
-      )
+      const firstInvalidField = [
+        'title',
+        'author',
+        'pageCount',
+        'status',
+        'notes',
+      ].find((field) => nextErrors[field])
 
       refs[firstInvalidField]?.current?.focus()
       return
@@ -108,6 +127,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
     onSubmit({
       title: form.title.trim(),
       author: form.author.trim(),
+      pageCount: Number(form.pageCount),
       status: form.status,
       notes: form.notes.trim(),
     })
@@ -122,7 +142,6 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
   return (
     <section className="panel form-panel" aria-labelledby="form-title">
       <div className="panel-heading">
-        <p className="eyebrow">{isEditing ? 'DÜZENLEME' : 'YENİ KAYIT'}</p>
         <h2 id="form-title">{isEditing ? 'Kitabı düzenle' : 'Yeni kitap'}</h2>
         <p>
           {isEditing
@@ -185,6 +204,33 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
         </div>
 
         <div className="field">
+          <label htmlFor="book-page-count">
+            Sayfa sayısı <span aria-hidden="true">*</span>
+          </label>
+          <input
+            ref={pageCountRef}
+            id="book-page-count"
+            name="pageCount"
+            type="number"
+            value={form.pageCount}
+            onChange={handleChange}
+            placeholder="Örn. 320"
+            min="1"
+            max="10000"
+            step="1"
+            required
+            aria-required="true"
+            aria-invalid={Boolean(errors.pageCount)}
+            aria-describedby={errors.pageCount ? 'page-count-error' : undefined}
+          />
+          {errors.pageCount && (
+            <p className="field-error" id="page-count-error">
+              {errors.pageCount}
+            </p>
+          )}
+        </div>
+
+        <div className="field">
           <label htmlFor="book-status">
             Durum <span aria-hidden="true">*</span>
           </label>
@@ -223,7 +269,7 @@ export default function BookForm({ editingBook, onSubmit, onCancelEdit }) {
             value={form.notes}
             onChange={handleChange}
             placeholder="Kitap hakkında kısa bir not ekleyebilirsin."
-            rows={4}
+            rows={3}
             maxLength={300}
             aria-invalid={Boolean(errors.notes)}
             aria-describedby={errors.notes ? 'notes-error' : undefined}
