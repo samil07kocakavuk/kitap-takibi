@@ -1,8 +1,8 @@
 import { isValidStatus } from '../interfaces/books.js'
 
-export const LEGACY_STORAGE_KEY = 'kitap-takibi.books.v1'
+const LEGACY_STORAGE_KEY = 'kitap-takibi.books.v1'
 
-export function booksStorageKey(userId) {
+function booksStorageKey(userId) {
   return `${LEGACY_STORAGE_KEY}.${userId}`
 }
 
