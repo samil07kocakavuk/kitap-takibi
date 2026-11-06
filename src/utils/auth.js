@@ -139,7 +139,7 @@ function createId() {
   return `acc-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`
 }
 
-export function normalizeEmail(value) {
+function normalizeEmail(value) {
   return asText(value).toLowerCase()
 }
 
