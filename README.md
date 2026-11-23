@@ -1,18 +1,15 @@
 # Kitap Takibi
 
-Kitap Takibi, kitapların okuma durumunu takip etmek için geliştirilmiş bir React uygulamasıdır. Kitaplar eklenebilir, listelenebilir, düzenlenebilir ve silinebilir. Veriler tarayıcının LocalStorage alanında saklanır; backend veya veritabanı kullanılmaz.
-
-Uygulama yerel hesaplarla çalışır. İlk açılışta giriş ekranı gelir; hesap oluşturma bağlantısı bu ekrandan açılır. Giriş yaptıktan sonra kitap listesine erişilir.
+Kitap Takibi, okuduğun ve okuyacağın kitapları takip etmek için geliştirilmiş bir React uygulamasıdır. Giriş veya hesap oluşturma gerekmez; uygulama açıldığında doğrudan kitap listesi gelir. Kitaplar eklenebilir, listelenebilir, düzenlenebilir ve silinebilir. Veriler tarayıcının LocalStorage alanında saklanır; backend veya veritabanı kullanılmaz.
 
 ## Özellikler
 
-- Yerel hesap oluşturma, giriş ve çıkış
 - Kitap ekleme, listeleme, düzenleme ve silme
 - Okuma durumu, sayfa sayısı ve not alanları
-- Hesap bazlı kitap listesi
+- Form doğrulama ve anlaşılır hata mesajları
+- Onaylı kitap silme ve boş liste durumu
 - LocalStorage ile veri kalıcılığı
 - Masaüstü ve mobil uyumlu arayüz
-- Hesabım sayfasında ad ve şifre güncelleme, okuma özeti
 
 ## Teknolojiler
 
@@ -50,30 +47,27 @@ Uygulama Netlify üzerinde yayımlanmıştır.
 
 ## Kullanım
 
-İlk açılışta giriş ekranı gelir. "Hesap oluştur" bağlantısıyla yeni hesap açılır; giriş yaptıktan sonra kitap ekleme, düzenleme ve silme işlemleri yapılabilir. Veriler aynı tarayıcıda saklanır; sayfa yenilendiğinde korunur.
+Uygulama açıldığında kitap ekleme formu ve kitap listesi doğrudan görüntülenir. Yeni kitap eklemek için formu doldurup "Kitap ekle" düğmesine basabilirsin. Listelenen kitapları "Düzenle" ile güncelleyebilir, "Sil" ile onay vererek kaldırabilirsin. Veriler aynı tarayıcıda saklanır; sayfa yenilendiğinde korunur.
 
 ## Proje Yapısı
 
 ```text
 src/
-  components/   ortak arayüz bileşenleri
-  hooks/        sayfa yönlendirme
-  pages/        giriş, kayıt, hesap ve kitap sayfaları
+  components/   form, liste ve başlık bileşenleri
+  pages/        kitap sayfası
   interfaces/   kitap modeli ve durum sabitleri
-  utils/        hesap ve kitap depolama işlemleri
+  utils/        kitap depolama işlemleri
   App.jsx
   main.jsx
 ```
 
 ## Veri Saklama
 
-Hesaplar, oturum bilgisi ve kitaplar LocalStorage'da tutulur. Şifreler düz metin olarak saklanmaz. Veriler yalnızca kullanılan tarayıcıda bulunur; farklı cihazlarla eşitlenmez.
+Kitaplar LocalStorage'da tutulur. Veriler yalnızca kullanılan tarayıcıda bulunur; farklı cihazlarla eşitlenmez.
 
 ## Ekran Görüntüsü
 
 ![Kitap Takibi ekran görüntüsü](docs/ekran-goruntusu.png)
-
-Ekran görüntüsündeki hesap ve kayıtlar tanıtım amaçlıdır.
 
 ## GitHub Deposu
 
@@ -81,6 +75,6 @@ https://github.com/samil07kocakavuk/kitap-takibi
 
 ## Notlar
 
-- Tarayıcı verileri temizlenirse hesaplar ve kitaplar silinir.
-- Yerel hesap sistemi gerçek bir sunucu kimlik doğrulaması değildir.
+- Tarayıcı verileri temizlenirse kitaplar silinir.
+- Veriler farklı cihazlar arasında otomatik olarak eşitlenmez.
 - Proje kapsamında backend ve veritabanı bulunmaz.

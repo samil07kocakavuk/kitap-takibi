@@ -7,8 +7,8 @@ function createId() {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`
 }
 
-export default function BooksPage({ accountId }) {
-  const [data, setData] = useState(() => loadBooks(accountId))
+export default function BooksPage() {
+  const [data, setData] = useState(() => loadBooks())
   const [editingBook, setEditingBook] = useState(null)
   const [feedback, setFeedback] = useState(() =>
     data.error ? { type: 'error', message: data.error } : null,
@@ -32,7 +32,7 @@ export default function BooksPage({ accountId }) {
   function commit(nextBooks, successMessage) {
     setData({ books: nextBooks, error: '' })
 
-    if (saveBooks(accountId, nextBooks)) {
+    if (saveBooks(nextBooks)) {
       setFeedback({ type: 'success', message: successMessage })
     } else {
       setFeedback({
@@ -136,7 +136,7 @@ export default function BooksPage({ accountId }) {
       </main>
 
       <footer className="mt-6 text-center text-xs text-stone-500">
-        Veriler bu tarayıcıda, hesabına bağlı olarak saklanır.
+        Veriler bu tarayıcıda saklanır.
       </footer>
     </div>
   )

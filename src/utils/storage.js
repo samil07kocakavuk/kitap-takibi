@@ -1,10 +1,6 @@
 import { isValidStatus } from '../interfaces/books.js'
 
-const LEGACY_STORAGE_KEY = 'kitap-takibi.books.v1'
-
-function booksStorageKey(userId) {
-  return `${LEGACY_STORAGE_KEY}.${userId}`
-}
+const STORAGE_KEY = 'kitap-takibi.books.v1'
 
 function asText(value) {
   return typeof value === 'string' ? value.trim() : ''
@@ -38,13 +34,9 @@ function normalizeBook(value) {
   }
 }
 
-export function loadBooks(userId) {
-  if (!userId) {
-    return { books: [], error: '' }
-  }
-
+export function loadBooks() {
   try {
-    const raw = localStorage.getItem(booksStorageKey(userId))
+    const raw = localStorage.getItem(STORAGE_KEY)
 
     if (raw === null) {
       return { books: [], error: '' }
@@ -76,37 +68,9 @@ export function loadBooks(userId) {
   }
 }
 
-export function saveBooks(userId, books) {
-  if (!userId) {
-    return false
-  }
-
+export function saveBooks(books) {
   try {
-    localStorage.setItem(booksStorageKey(userId), JSON.stringify(books))
-    return true
-  } catch {
-    return false
-  }
-}
-
-export function migrateLegacyBooks(userId) {
-  if (!userId) {
-    return false
-  }
-
-  try {
-    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY)
-
-    if (legacy === null) {
-      return false
-    }
-
-    if (localStorage.getItem(booksStorageKey(userId)) !== null) {
-      return false
-    }
-
-    localStorage.setItem(booksStorageKey(userId), legacy)
-    localStorage.removeItem(LEGACY_STORAGE_KEY)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(books))
     return true
   } catch {
     return false
