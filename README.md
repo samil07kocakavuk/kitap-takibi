@@ -1,6 +1,6 @@
 # Kitap Takibi
 
-Kitap Takibi, okuduğun ve okuyacağın kitapları takip etmek için geliştirilmiş bir React uygulamasıdır. Giriş veya hesap oluşturma gerekmez; uygulama açıldığında doğrudan kitap listesi gelir. Kitaplar eklenebilir, listelenebilir, düzenlenebilir ve silinebilir. Veriler tarayıcının LocalStorage alanında saklanır; backend veya veritabanı kullanılmaz.
+Kitap Takibi, okuduğun ve okuyacağın kitapları takip etmek için geliştirilmiş bir React uygulamasıdır. Uygulama açıldığında doğrudan kitap listesi gelir. Kitaplar eklenebilir, listelenebilir, düzenlenebilir ve silinebilir. Veriler tarayıcının LocalStorage alanında saklanır; backend veya veritabanı kullanılmaz.
 
 ## Özellikler
 
